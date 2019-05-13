@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: GoldenCube
   m_EditorClassIdentifier: 
   name: GoldenCube
+  sprite: {fileID: 603426421115640431, guid: 7116cf3b22de6f545bc5ed951e7784ae, type: 3}
   mat: {fileID: 2100000, guid: 585c531079856c24aa8a5c71a95c965a, type: 2}
   magic: 100
   strength: 100

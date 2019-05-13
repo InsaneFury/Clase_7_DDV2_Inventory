@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Inventory : Singleton<Inventory>
 {
+    [Header("Inventory Slots")]
+    public Slot[] slots;
+
     [SerializeField]
     List<GameObject> items;
     float posYGap = 1f; // Instantiate object with a Y gap
@@ -17,22 +20,47 @@ public class Inventory : Singleton<Inventory>
     {
         items = new List<GameObject>();
     }
-
-    public void AddItemToInventory(GameObject go)
+    private void Update()
     {
-        items.Add(go);
-        go.SetActive(false);
+       /* for (int i = 1; i < slots.Length; i++)
+        {
+            if (!slots[i - 1].isFull)
+            {
+                slots[i].transform.GetChild(0).transform.SetParent(slots[i].transform);
+            }
+        }*/ //sort items
+        
     }
 
-    public void RemoveItemFromInventory(Vector3 dropPos)
+    public bool AddItemToInventory(GameObject item)
+    {
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (!slots[i].isFull)
+            {
+                items.Add(item);
+                item.GetComponent<Item>().slotId = slots[i].slotIndex;
+                item.SetActive(false);
+                Instantiate(item.GetComponent<Item>().sprite, slots[i].transform, false);
+                slots[i].isFull = true;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public bool RemoveItemFromInventory(Vector3 dropPos,GameObject item)
     {
         if (items.Count > 0)
         {
+            int index = items.IndexOf(item);
             dropPos.y += posYGap;
-            items[0].transform.position = dropPos;
-            items[0].transform.rotation = transform.rotation;
-            items[0].SetActive(true);
-            items.RemoveAt(0);
+            items[index].transform.position = dropPos;
+            items[index].transform.rotation = transform.rotation;
+            items[index].SetActive(true);
+            items.RemoveAt(index);
+            return true;
         }
+        return false;
     }
 }

@@ -7,6 +7,7 @@ public class ItemUniqueStats : ScriptableObject
 {
     [Header("Unique Item Stats")]
     public new string name;
+    public GameObject sprite;
     public Material mat;
     public int magic;
     public int strength;

@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class ItemSpawner : Singleton<ItemSpawner>
 {
-    
-    
     [Header("RandomItemsSettings")]
     [Tooltip("Prefab to instantiate require item script attached to")]
     public GameObject prefab;
+    [Tooltip("List of Random UI sprites for each item")]
+    public List<GameObject> sprites;
     [Tooltip("List of random materials to random items")]
     public Material[] materials;
     [Tooltip("Max random stats to random items")]
@@ -51,8 +51,9 @@ public class ItemSpawner : Singleton<ItemSpawner>
             getUniqueItem = false;
         }
 
-        if (getUniqueItem)
+        if (getUniqueItem) //Use Scriptable object stats
         {
+            itemSettings.sprite = GoldenCube.sprite;
             itemSettings.mat = GoldenCube.mat;
             itemSettings.itemName = GoldenCube.name;
             itemSettings.magic = GoldenCube.magic;
@@ -63,9 +64,11 @@ public class ItemSpawner : Singleton<ItemSpawner>
         }
         else
         {
-            randomMaterial = (int)(Random.Range(0f, materials.Length));
+            int random = (int)(Random.Range(0f, materials.Length));
+            randomMaterial = random;
+            itemSettings.sprite = sprites[random];
             itemSettings.mat = materials[randomMaterial];
-            itemSettings.itemName = "RandomCube";
+            itemSettings.itemName = sprites[random].name;
             itemSettings.magic = (int)(Random.Range(0f, maxStatsPoints));
             itemSettings.mana = (int)(Random.Range(0f, maxStatsPoints));
             itemSettings.strength = (int)(Random.Range(0f, maxStatsPoints));

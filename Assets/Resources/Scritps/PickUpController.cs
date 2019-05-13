@@ -20,10 +20,6 @@ public class PickUpController : MonoBehaviour
         {
             PickItem();
         }
-        if (Input.GetMouseButtonDown(1))
-        {
-            DropItem();
-        }
     }
 
     public void PickItem()
@@ -35,19 +31,33 @@ public class PickUpController : MonoBehaviour
         {
             if (hit.collider.CompareTag("Item"))
             {
-                inv.AddItemToInventory(hit.collider.gameObject);
+                if (inv.AddItemToInventory(hit.collider.gameObject))
+                {
+                    Debug.Log(hit.collider.name + " Added to inventory");
+                }
+                else
+                {
+                    Debug.Log("Inventory is Full");
+                }
             }
         }
     }
 
-    public void DropItem()
+    public void DropItem(GameObject item)
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, PickUpDistance))
         {
-            inv.RemoveItemFromInventory(hit.point);
+            if (inv.RemoveItemFromInventory(hit.point,item))
+            {
+                Debug.Log("Item removed from inventory successfully");
+            }
+            else
+            {
+                Debug.Log("Your inventory is empty");
+            }
         } 
     }
 }

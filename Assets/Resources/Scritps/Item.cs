@@ -6,6 +6,8 @@ public class Item : MonoBehaviour
 {
     [Header("ItemSettings")]
     public string itemName = "Cube";
+    public int slotId = 0;
+    public GameObject sprite;
     public Material mat;
     public int magic = 0;
     public int strength = 0;
