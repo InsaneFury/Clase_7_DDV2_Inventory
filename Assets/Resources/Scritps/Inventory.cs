@@ -22,13 +22,6 @@ public class Inventory : Singleton<Inventory>
     }
     private void Update()
     {
-       /* for (int i = 1; i < slots.Length; i++)
-        {
-            if (!slots[i - 1].isFull)
-            {
-                slots[i].transform.GetChild(0).transform.SetParent(slots[i].transform);
-            }
-        }*/ //sort items
         
     }
 
