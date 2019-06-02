@@ -32,7 +32,6 @@ public class Inventory : Singleton<Inventory>
             if (!slots[i].isFull)
             {
                 items.Add(item);
-                item.slotId = slots[i].slotIndex;
                 Instantiate(item.sprite, slots[i].transform, false);
                 slots[i].isFull = true;
                 return true;

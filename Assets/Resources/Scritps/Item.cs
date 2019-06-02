@@ -5,14 +5,15 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     [Header("ItemSettings")]
-    public string itemName = "Cube";
-    public int slotId = 0;
+    public string itemName = "none";
+    public string itemType = "none";
+    public string itemSubType = "none";
+    public int itemLevel = 1;
+    public int itemDurability = 100;
+    public float itemWeight = 1f;
+    
     public GameObject sprite;
     public Material mat;
-    public int magic = 0;
-    public int strength = 0;
-    public int agility = 0;
-    public int mana = 0;
 
     private void Start()
     {
