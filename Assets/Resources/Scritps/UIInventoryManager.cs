@@ -34,8 +34,7 @@ public class UIInventoryManager : Singleton<UIInventoryManager>
             else
             {
                 Cursor.lockState = CursorLockMode.Locked;
-            }
-            
+            }   
         }
     }
 

@@ -31,7 +31,7 @@ public class PickUpController : MonoBehaviour
         {
             if (hit.collider.CompareTag("Item"))
             {
-                if (inv.AddItemToInventory(hit.collider.gameObject))
+                if (inv.AddItemToInventory(hit.collider.gameObject.GetComponent<Item>()))
                 {
                     Debug.Log(hit.collider.name + " Added to inventory");
                 }
@@ -50,7 +50,7 @@ public class PickUpController : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, PickUpDistance))
         {
-            if (inv.RemoveItemFromInventory(hit.point,item))
+            if (inv.RemoveItemFromInventory(hit.point, hit.collider.gameObject.GetComponent<Item>()))
             {
                 Debug.Log("Item removed from inventory successfully");
             }
