@@ -15,10 +15,6 @@ public class UIInventoryManager : Singleton<UIInventoryManager>
         base.Awake();
     }
 
-    void Start()
-    {
-    }
-
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.I))
@@ -36,14 +32,5 @@ public class UIInventoryManager : Singleton<UIInventoryManager>
                 Cursor.lockState = CursorLockMode.Locked;
             }   
         }
-    }
-
-    public void SetSprite(Sprite sprite)
-    {
-  
-    }
-
-    public void RemoveSprite(Sprite sprite)
-    {
     }
 }

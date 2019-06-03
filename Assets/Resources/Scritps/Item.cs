@@ -12,7 +12,7 @@ public class Item : MonoBehaviour
     public int itemDurability = 100;
     public float itemWeight = 1f;
     
-    public GameObject sprite;
+    public Sprite sprite;
     public Material mat;
 
     private void Start()

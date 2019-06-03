@@ -18,5 +18,5 @@ MonoBehaviour:
   itemLevel: 80
   itemDurability: 100
   itemWeight: 8.2
-  sprite: {fileID: 603426421115640431, guid: 7116cf3b22de6f545bc5ed951e7784ae, type: 3}
+  sprite: {fileID: 21300000, guid: c58e488b3f1f99f40947ede9734f0aaf, type: 3}
   mat: {fileID: 2100000, guid: 585c531079856c24aa8a5c71a95c965a, type: 2}

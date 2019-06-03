@@ -13,7 +13,7 @@ public class ItemUniqueStats : ScriptableObject
     public int itemDurability;
     public float itemWeight;
 
-    public GameObject sprite;
+    public Sprite sprite;
     public Material mat;
 
 }

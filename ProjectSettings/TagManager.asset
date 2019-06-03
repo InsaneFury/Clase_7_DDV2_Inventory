@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Item
+  - Slot
+  - Icon
+  - Border
   layers:
   - Default
   - TransparentFX

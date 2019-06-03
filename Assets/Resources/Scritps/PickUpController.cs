@@ -34,6 +34,7 @@ public class PickUpController : MonoBehaviour
                 if (inv.AddItemToInventory(hit.collider.gameObject.GetComponent<Item>()))
                 {
                     Debug.Log(hit.collider.name + " Added to inventory");
+                    hit.collider.gameObject.SetActive(false);
                 }
                 else
                 {
@@ -50,9 +51,9 @@ public class PickUpController : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, PickUpDistance))
         {
-            if (inv.RemoveItemFromInventory(hit.point, hit.collider.gameObject.GetComponent<Item>()))
+            if (inv.RemoveItemFromInventory(hit.collider.gameObject.GetComponent<Item>()))
             {
-                Debug.Log("Item removed from inventory successfully");
+                Debug.Log("Item removed from inventory successfully"); 
             }
             else
             {

@@ -7,9 +7,9 @@ using UnityEngine.UI;
 public class UIitem : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragHandler,IPointerDownHandler,IPointerUpHandler
 {
     public Vector2 OnClickSize;
+    public Image icon;
     Vector2 originalSize;
     RectTransform currentItem;
-    Image icon;
     bool hasSprite = false;
 
     private void Start()
@@ -23,7 +23,7 @@ public class UIitem : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragHandl
     {
         if (hasSprite)
         {
-            Debug.Log("isBeginDraw");
+            icon.raycastTarget = false;
         }  
     }
 
@@ -32,12 +32,36 @@ public class UIitem : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragHandl
         if (hasSprite)
         {
             transform.position = Input.mousePosition;
+            
+            Debug.Log(eventData.pointerCurrentRaycast.gameObject.tag);
         }
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-         transform.localPosition = Vector3.zero;
+        icon.raycastTarget = true;
+        GameObject _icon;
+        _icon = null;
+        if (eventData.pointerCurrentRaycast.gameObject.CompareTag("Icon"))
+        {
+            _icon = eventData.pointerCurrentRaycast.gameObject;
+            Debug.Log("OnIcon");
+            if (!_icon.transform.parent.parent.GetComponent<Slot>().isFull)
+            {
+                transform.localPosition = _icon.transform.localPosition;
+            }
+            else
+            {
+                Vector3 temp;
+                temp = _icon.transform.localPosition;
+                _icon.transform.localPosition = transform.localPosition;
+                transform.localPosition = temp;
+            }
+        }   
+        else
+        {
+            transform.localPosition = Vector3.zero;
+        }
     }
 
     public void OnPointerDown(PointerEventData eventData)

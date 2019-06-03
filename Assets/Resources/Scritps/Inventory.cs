@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Inventory : Singleton<Inventory>
 {
@@ -9,7 +10,6 @@ public class Inventory : Singleton<Inventory>
 
     [SerializeField]
     List<Item> items;
-    float posYGap = 1f; // Instantiate object with a Y gap
 
     public override void Awake()
     {
@@ -20,10 +20,6 @@ public class Inventory : Singleton<Inventory>
     {
         items = new List<Item>();
     }
-    private void Update()
-    {
-        
-    }
 
     public bool AddItemToInventory(Item item)
     {
@@ -32,7 +28,7 @@ public class Inventory : Singleton<Inventory>
             if (!slots[i].isFull)
             {
                 items.Add(item);
-                Instantiate(item.sprite, slots[i].transform, false);
+                slots[i].transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = item.sprite;
                 slots[i].isFull = true;
                 return true;
             }
@@ -40,16 +36,20 @@ public class Inventory : Singleton<Inventory>
         return false;
     }
 
-    public bool RemoveItemFromInventory(Vector3 dropPos,Item item)
+    public bool RemoveItemFromInventory(Item item)
     {
-        if (items.Count > 0)
+        for (int i = 0; i < slots.Length; i++)
         {
-            int index = items.IndexOf(item);
-            dropPos.y += posYGap;
-            items[index].transform.position = dropPos;
-            items[index].transform.rotation = transform.rotation;
-            items.RemoveAt(index);
-            return true;
+            if (slots[i].isFull)
+            {
+                if (items.Contains(item))
+                {
+                    items.Remove(item);
+                    slots[i].transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = null;
+                    slots[i].isFull = false;
+                }
+                return true;
+            }
         }
         return false;
     }
